@@ -40,7 +40,7 @@ function AreaOfExpertise({}: Props) {
 
   return (
     <div className="space-y-4 sm:space-y-8">
-      <div className="w-full border p-2 min-h-[35px] max-h-[100px] overflow-auto border-dashed border-black/50 rounded flex gap-3 flex-wrap">
+      <div className="w-full border p-2 min-h-[35px] max-h-[80px] overflow-auto border-dashed border-black/50 rounded flex gap-3 flex-wrap">
         {areaOfExpertise.length === 0 ? (
           <p className="text-sm text-center w-full text-muted-foreground">
             ...Please select from the list below...
@@ -67,7 +67,7 @@ function AreaOfExpertise({}: Props) {
         )}
       </div>
 
-      <div className="space-y-5 overflow-auto w-full h-full max-h-[40svh] px-6">
+      <div className="space-y-2 sm:space-y-5 overflow-auto w-full h-full max-h-[30svh] sm:max-h-[40svh] px-2 sm:px-6">
         {areaOfExpertiseData.map((item, index) => (
           <div
             key={item}
@@ -80,8 +80,14 @@ function AreaOfExpertise({}: Props) {
               );
             }}
           >
-            <span className="p-2 text-white bg-primary">{index + 1}</span>
-            <span className={cn("border-none outline-none w-full h-full")}>
+            <span className="p-1 sm:p-2 text-white bg-primary">
+              {index + 1}
+            </span>
+            <span
+              className={cn(
+                "border-none outline-none w-full h-full text-clampSm"
+              )}
+            >
               {item}
             </span>
             {areaOfExpertise.includes(item) && (
