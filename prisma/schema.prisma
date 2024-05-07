@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model guidedForm {
+  id                          String @id @default(uuid())
+  fullName                    String
+  email                       String @unique
+  gender                      String
+  country                     String
+  currentRole                 String
+  areaOfExpertise             String @db.LongText
+  workingInYourField          String
+  levelOfEducation            String
+  sustainableDevelopmentGoals String
+  mentorshipFrequency         String
+  yearsOfWorkExperience       String
+
+  primaryMotivationUniversity String?
+  primaryMotivationCareer     String?
+  careerPathExtent            String?
+  linkToSocialMedia           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

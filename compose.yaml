@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  guided-form-nextjs:
+    # uncomment the following line if you want to run a local instance of MongoDB
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # do port mapping so that we can access the app from the browser
+    ports:
+      - 3000:3000
+    
+    # use docker compose to watch for changes and rebuild the container
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./next.config.js
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        - path: .
+          target: /app
+          action: sync
+    
+    # define the environment variables
+    environment:
+      DATABASE_URL: "mysql://guided_mysql:Careers1234$@guided-server.mysql.database.azure.com/guided_db"
+    
+volumes:
+  guided-form:
