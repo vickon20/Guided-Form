@@ -44,10 +44,12 @@ function GenderForm({}: Props) {
             )}
             onClick={() => setGender(item.value)}
           >
-            <span className="p-2 text-white bg-primary">{index + 1}</span>
+            <span className="p-1 sm:p-2 text-white bg-primary">
+              {index + 1}
+            </span>
             <span>{item.value}</span>
             {gender === item.value && (
-              <CircleCheckBig size={22} className="ml-auto mr-4" />
+              <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
             )}
           </div>
         ))}

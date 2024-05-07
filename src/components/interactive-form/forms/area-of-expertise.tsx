@@ -85,13 +85,13 @@ function AreaOfExpertise({}: Props) {
             </span>
             <span
               className={cn(
-                "border-none outline-none w-full h-full text-clampSm"
+                "border-none outline-none w-full h-full text-sm sm:text-clampSm"
               )}
             >
               {item}
             </span>
             {areaOfExpertise.includes(item) && (
-              <CircleCheckBig size={22} className="ml-auto mr-4" />
+              <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
             )}
           </div>
         ))}

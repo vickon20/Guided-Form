@@ -37,7 +37,7 @@ function LevelOfEducationForm({}: Props) {
 
   return (
     <div className="space-y-8">
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         {levelOfEducationData.map((item, index) => (
           <div
             key={item.value}
@@ -49,10 +49,18 @@ function LevelOfEducationForm({}: Props) {
             )}
             onClick={() => setLevelOfEducation(item.value)}
           >
-            <span className="p-2 text-white bg-primary">{index + 1}</span>
-            <span>{item.value}</span>
+            <span className="p-1 sm:p-2 text-white bg-primary">
+              {index + 1}
+            </span>
+            <span
+              className={cn(
+                "border-none outline-none w-full h-full text-sm sm:text-clampSm"
+              )}
+            >
+              {item.value}
+            </span>
             {levelOfEducation === item.value && (
-              <CircleCheckBig size={22} className="ml-auto mr-4" />
+              <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
             )}
           </div>
         ))}

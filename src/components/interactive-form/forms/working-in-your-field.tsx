@@ -67,20 +67,25 @@ function WorkingInYourField({}: Props) {
                 setWorkingFieldData(item);
               }}
             >
-              <span className="p-2 text-white bg-primary">{index + 1}</span>
+              <span className="p-1 sm:p-2 text-white bg-primary">
+                {index + 1}
+              </span>
               <span
                 suppressContentEditableWarning
                 contentEditable={!excluded}
-                className={cn("border-none outline-none w-full h-full", {
-                  "max-w-[220px] border-[2px] px-1 border-dashed border-primary/20":
-                    !excluded,
-                })}
+                className={cn(
+                  "border-none outline-none w-full h-full text-sm sm:text-clampSm",
+                  {
+                    "max-w-[220px] border-[2px] px-1 border-dashed border-primary/20":
+                      !excluded,
+                  }
+                )}
                 onBlur={(e) => setOthers(e.target.innerText)}
               >
                 {item}
               </span>
               {workingFieldData === item && (
-                <CircleCheckBig size={22} className="ml-auto mr-4" />
+                <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
               )}
             </div>
           );

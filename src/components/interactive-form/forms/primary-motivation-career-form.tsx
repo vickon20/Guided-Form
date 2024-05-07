@@ -77,14 +77,14 @@ function PrimaryMotivationCareer({}: Props) {
                         "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border transition-all duration-300 cursor-grab rounded"
                       )}
                     >
-                      <span className="p-2 text-white bg-primary">
+                      <span className="p-1 sm:p-2 text-white bg-primary">
                         {index + 1}
                       </span>
                       <span
                         suppressContentEditableWarning
                         contentEditable={!excludedEditable.includes(item)}
                         className={cn(
-                          "border-none outline-none w-full h-full",
+                          "border-none outline-none w-full h-full text-sm sm:text-clampSm",
                           {
                             "max-w-[220px] border-[2px] px-1 border-dashed border-primary/20":
                               !excludedEditable.includes(item),
