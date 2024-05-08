@@ -41,7 +41,7 @@ const initialForm: TInteractiveFormSchema = {
   areaOfExpertise: [],
   careerPathExtent: "",
   currentRole: "",
-  sustainableDevelopmentGoals: "",
+  sustainableDevelopmentGoals: [],
   linkToSocialMedia: "",
   mentorshipFrequency: "",
   primaryMotivationCareer: primaryMotivationData,

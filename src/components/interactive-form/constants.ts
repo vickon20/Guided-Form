@@ -55,6 +55,77 @@ export const workingInYourFieldData = [
   "Others (please specify)",
 ];
 
+export const sdgData = [
+  {
+    title: "No Poverty",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-01.jpg",
+  },
+  {
+    title: "Zero Hunger",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-02.jpg",
+  },
+  {
+    title: "Good Health",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg",
+  },
+  {
+    title: "Quality Education",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-04.jpg",
+  },
+  {
+    title: "Gender Equality",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-05.jpg",
+  },
+  {
+    title: "Clean Water And Sanitation",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-06.jpg",
+  },
+  {
+    title: "Affordable And Clean Energy",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-07.jpg",
+  },
+  {
+    title: "Decent Work And Economic Growth",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-08.jpg",
+  },
+  {
+    title: "Industry, Innovation and Infrastructure",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-09.jpg",
+  },
+  {
+    title: "Reduced Inequalities",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-10.jpg",
+  },
+  {
+    title: "Sustainable Cities and Communities",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-11.jpg",
+  },
+  {
+    title: "Responsible Consumption and Production",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg",
+  },
+  {
+    title: "Climate Action",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-13.jpg",
+  },
+  {
+    title: "Life Below Water",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-14.jpg",
+  },
+  {
+    title: "Life On Land",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-15.jpg",
+  },
+  {
+    title: "Peace Justice and Strong Institutions",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-16.jpg",
+  },
+  {
+    title: "Partnership For The Goals",
+    href: "https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-17.jpg",
+  },
+];
+
 export const mentorshipFrquencyData = [
   { value: "Once a week" },
   { value: "Biweekly" },

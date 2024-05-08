@@ -68,13 +68,17 @@ function PrimaryMotivationUniversity({}: Props) {
             >
               {motivationData.map((item, index) => (
                 <Draggable key={item} draggableId={item} index={index}>
-                  {(provided) => (
+                  {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       className={cn(
-                        "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border transition-all duration-300 cursor-grab rounded !left-auto !top-auto"
+                        "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border cursor-grab rounded !left-auto !top-auto",
+                        {
+                          "bg-primary text-primary-foreground":
+                            snapshot.isDragging,
+                        }
                       )}
                     >
                       <span className="p-1 sm:p-2 text-white bg-primary">
@@ -84,13 +88,14 @@ function PrimaryMotivationUniversity({}: Props) {
                         suppressContentEditableWarning
                         contentEditable={!excludedEditable.includes(item)}
                         className={cn(
-                          "border-none outline-none w-full h-full text-sm sm:text-clampSm",
+                          "border-none outline-none w-full text-sm sm:text-clampSm",
                           {
                             "max-w-[220px] border-[2px] px-1 border-dashed border-primary/20":
                               !excludedEditable.includes(item),
                           }
                         )}
-                        onBlur={(e) =>
+                        onBlur={(e) => {
+                          if (excludedEditable.includes(item)) return;
                           setMotivationData((prev) =>
                             prev.map((item, i) => {
                               if (!excludedEditable.includes(item)) {
@@ -98,8 +103,8 @@ function PrimaryMotivationUniversity({}: Props) {
                               }
                               return item;
                             })
-                          )
-                        }
+                          );
+                        }}
                       >
                         {item}
                       </span>

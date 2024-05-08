@@ -3,13 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 import { toast } from "sonner";
+import { sdgData } from "../constants";
 import useInteractiveForm from "../use-interactive-form-hook";
-import { Form } from "@/components/ui/form";
-import CustomForm from "@/components/custom-form";
-import { useForm } from "react-hook-form";
-import { TInteractiveFormSchema, interactiveFormSchema } from "./zodSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {};
 
@@ -22,56 +20,73 @@ function SustainableDevelopmentGoalsForm({}: Props) {
     form: defaultData,
   } = useInteractiveForm();
 
-  const form = useForm<TInteractiveFormSchema>({
-    resolver: zodResolver(interactiveFormSchema),
-    defaultValues: {
-      sustainableDevelopmentGoals: defaultData.sustainableDevelopmentGoals,
-    },
-  });
+  const [sdgValue, setSdgValue] = useState(
+    defaultData.sustainableDevelopmentGoals || []
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function onNext(values: TInteractiveFormSchema) {
-    if (!values.sustainableDevelopmentGoals)
-      return toast.error("Please select a value");
+  async function onNext() {
+    if (sdgValue.length === 0) return toast.error("Please select an SDG");
+
+    setIsLoading(true);
     setFormData({
-      sustainableDevelopmentGoals: values.sustainableDevelopmentGoals,
+      sustainableDevelopmentGoals: sdgValue,
     });
     await new Promise((resolve) => setTimeout(resolve, 500));
+    setIsLoading(false);
     nextPage();
   }
 
-  const isLoading = form.formState.isLoading;
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onNext)} className="space-y-8">
-        <CustomForm
-          form={form}
-          type="text"
-          name="sustainableDevelopmentGoals"
-          formLabel="SDG"
-          disabled={isLoading}
-          placeholder="type here..."
-          isRequired
-        />
+    <div className="space-y-8">
+      <div className="flex items-center flex-wrap justify-center gap-3 overflow-auto h-full max-h-[400px] p-2">
+        {sdgData.map((item, index) => (
+          <div
+            key={item.title + index}
+            className={cn(
+              "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border transition-all duration-300 cursor-pointer rounded relative h-[100px] sm:h-[150px] aspect-square overflow-hidden ",
+              {
+                "outline-primary outline-dashed outline-[2px] outline-offset-1 brightness-75":
+                  sdgValue.includes(item.title),
+              }
+            )}
+            onClick={() =>
+              setSdgValue((prev) => {
+                if (prev.includes(item.title)) {
+                  return prev.filter((val) => val !== item.title);
+                }
+                return [...prev, item.title];
+              })
+            }
+          >
+            <Image
+              src={item.href}
+              alt="SDG-image"
+              fill
+              className="w-full h-full object-contain"
+            />
+          </div>
+        ))}
+      </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
-          <Button
-            disabled={currentPage.prev === ""}
-            onClick={previousPage}
-            variant="secondary"
-          >
-            <ChevronLeft /> Previous
-          </Button>
-          <Button
-            disabled={currentPage.next === ""}
-            type="submit"
-            isLoading={isLoading}
-          >
-            Next <ChevronRight />
-          </Button>
-        </div>
-      </form>
-    </Form>
+      <div className="flex items-center gap-2 sm:gap-4">
+        <Button
+          disabled={currentPage.prev === ""}
+          onClick={previousPage}
+          variant="secondary"
+        >
+          <ChevronLeft /> Previous
+        </Button>
+        <Button
+          disabled={currentPage.next === ""}
+          type="button"
+          isLoading={isLoading}
+          onClick={onNext}
+        >
+          Next <ChevronRight />
+        </Button>
+      </div>
+    </div>
   );
 }
 

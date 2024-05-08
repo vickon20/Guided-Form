@@ -13,7 +13,7 @@ export const interactiveFormSchema = z.object({
   primaryMotivationCareer: z.array(z.string()).optional(),
   workingInYourField: z.string().min(1).optional(),
   careerPathExtent: z.string().min(1).optional(),
-  sustainableDevelopmentGoals: z.string().min(1).optional(),
+  sustainableDevelopmentGoals: z.array(z.string()).optional(),
   linkToSocialMedia: z.string().url().optional(),
   mentorshipFrequency: z.string().min(1).optional(),
 });

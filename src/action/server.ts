@@ -47,7 +47,8 @@ export const saveFormInformation = async (values: TInteractiveFormSchema) => {
       areaOfExpertise: values.areaOfExpertise.join("---"),
       currentRole: values.currentRole,
       workingInYourField: values.workingInYourField,
-      sustainableDevelopmentGoals: values.sustainableDevelopmentGoals,
+      sustainableDevelopmentGoals:
+        values.sustainableDevelopmentGoals.join("---"),
       mentorshipFrequency: values.mentorshipFrequency,
       primaryMotivationCareer: values.primaryMotivationCareer?.join("---"),
       primaryMotivationUniversity:
