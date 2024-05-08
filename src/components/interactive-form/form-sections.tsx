@@ -32,7 +32,7 @@ const FormSection = ({
 
   return (
     <motion.section
-      className={cn("w-full flex flex-col h-full", {
+      className={cn("w-full flex flex-col flex-1", {
         "lg:flex-row ": otherSection,
         "items-center justify-center": !otherSection,
       })}
