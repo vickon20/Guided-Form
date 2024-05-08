@@ -74,7 +74,7 @@ function PrimaryMotivationCareer({}: Props) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       className={cn(
-                        "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border transition-all duration-300 cursor-grab rounded"
+                        "flex items-center gap-x-2 text-clampMd bg-accent hover:bg-border transition-all duration-300 cursor-grab rounded !left-auto !top-auto"
                       )}
                     >
                       <span className="p-1 sm:p-2 text-white bg-primary">
