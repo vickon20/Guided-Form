@@ -39,7 +39,7 @@ function SustainableDevelopmentGoalsForm({}: Props) {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center flex-wrap justify-center gap-3 overflow-auto h-full max-h-[400px] p-2">
+      <div className="flex items-center flex-wrap justify-center gap-3 overflow-auto h-full max-h-[300px] sm:max-h-[400px] p-2">
         {sdgData.map((item, index) => (
           <div
             key={item.title + index}
