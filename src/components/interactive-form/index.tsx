@@ -33,11 +33,10 @@ export function InteractiveForm() {
     !form.country ||
     !form.levelOfEducation ||
     !form.yearsOfWorkExperience ||
-    !form.areaOfExpertise ||
-    form.areaOfExpertise.length === 0 ||
+    form.areaOfExpertise?.length === 0 ||
     !form.currentRole ||
     !form.workingInYourField ||
-    !form.sustainableDevelopmentGoals ||
+    form.sustainableDevelopmentGoals?.length === 0 ||
     !form.mentorshipFrequency;
 
   return (

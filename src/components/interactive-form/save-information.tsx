@@ -40,9 +40,9 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
   };
 
   return (
-    <div className="w-full h-[50vh] py-2 overflow-hidden">
+    <div className="w-full py-2">
       {isIncompleteInfo && (
-        <div className="space-y-4 w-full h-full pb-10 overflow-auto">
+        <div className="space-y-4 w-full h-[50vh] pb-10 overflow-auto">
           {!form.fullName && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
@@ -121,19 +121,20 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Years of Work Experience is Required
             </p>
           )}
-          {!form.areaOfExpertise && (
-            <p className="text-sm text-destructive flex items-center gap-x-1">
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => setCurrentPage("area-of-expertise")}
-                className="text-xs !h-6 rounded-none"
-              >
-                &larr; Go
-              </Button>
-              Area of Expertise is Required
-            </p>
-          )}
+          {!form.areaOfExpertise ||
+            (form.areaOfExpertise.length === 0 && (
+              <p className="text-sm text-destructive flex items-center gap-x-1">
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => setCurrentPage("area-of-expertise")}
+                  className="text-xs !h-6 rounded-none"
+                >
+                  &larr; Go
+                </Button>
+                Area of Expertise is Required
+              </p>
+            ))}
           {!form.currentRole && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
@@ -161,19 +162,20 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
             </p>
           )}
 
-          {!form.sustainableDevelopmentGoals && (
-            <p className="text-sm text-destructive flex items-center gap-x-1">
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => setCurrentPage("sustainable-development-goal")}
-                className="text-xs !h-6 rounded-none"
-              >
-                &larr; Go
-              </Button>
-              SDG is Required
-            </p>
-          )}
+          {!form.sustainableDevelopmentGoals ||
+            (form.sustainableDevelopmentGoals.length === 0 && (
+              <p className="text-sm text-destructive flex items-center gap-x-1">
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => setCurrentPage("sustainable-development-goal")}
+                  className="text-xs !h-6 rounded-none"
+                >
+                  &larr; Go
+                </Button>
+                SDG is Required
+              </p>
+            ))}
 
           {!form.mentorshipFrequency && (
             <p className="text-sm text-destructive flex items-center gap-x-1">

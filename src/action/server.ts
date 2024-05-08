@@ -16,6 +16,7 @@ export const saveFormInformation = async (values: TInteractiveFormSchema) => {
     !values.currentRole ||
     !values.workingInYourField ||
     !values.sustainableDevelopmentGoals ||
+    values.sustainableDevelopmentGoals.length === 0 ||
     !values.mentorshipFrequency
   )
     return {
