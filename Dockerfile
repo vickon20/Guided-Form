@@ -25,6 +25,10 @@ USER appuser
 # Install the dependencies.
 RUN npm install
 
+COPY ./prisma prisma
+
+RUN prisma generate
+
 # Copy the rest of the source files into the image.
 COPY . .
 
