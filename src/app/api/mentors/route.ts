@@ -21,10 +21,16 @@ export async function GET(request: Request) {
       message: "mentors retrieved successfully",
     });
   } else {
+    const mentors = await db.guidedForm.findMany();
     return Response.json({
-      status: "failure",
-      message: "Invalid Request",
-      data: null,
+      status: "success",
+      message: "all mentors received successfully",
+      data: mentors,
     });
   }
 }
+
+// expose endpoints
+// https://guided-form.vercel.app/api/mentors
+// https://guided-form.vercel.app/api/mentors?id=${id}
+// https://guided-form.vercel.app/api/mentors?email=${email}
