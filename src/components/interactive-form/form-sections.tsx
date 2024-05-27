@@ -8,6 +8,7 @@ import React from "react";
 import GuidedLogoComponent from "../guided-logo-component";
 import { fmVariants } from "./constants";
 import { TPageId } from "./use-interactive-form-hook";
+import SlideButtons from "./slide-buttons";
 
 type Props = {
   sectionId: TPageId;
@@ -68,41 +69,46 @@ const FormSection = ({
         </motion.aside>
       )}
 
-      <motion.aside
-        className={cn(
-          "flex justify-center flex-1 gap-y-2 flex-col h-full w-full max-w-[800px] py-2 relative px-6 lg:px-10",
-          {
-            "flex-[0.5] lg:px-20": otherSection,
-          }
-        )}
-        initial={fmVariants.viewMotion.initial}
-        whileInView={fmVariants.viewMotion.whileInView}
-        viewport={fmVariants.viewMotion.viewport}
-        transition={fmVariants.transition}
-        key={sectionId}
+      <aside
+        className={cn("flex flex-1 flex-col h-full w-full", {
+          "flex-[0.6] lg:flex-[0.5]": otherSection,
+        })}
       >
-        <GuidedLogoComponent
-          logoWidth={80}
-          logoFill="#377fb9"
-          footPrintClassName="text-[#377fb9]"
-          className="w-fit sm:mb-4 bg-transparent hover:bg-transparent !p-0"
-        />
-        <SpiralPointer width={30} className="sm:-ml-4" />
-        <h2 className="text-clampMd sm:!text-clampBase font-semibold">
-          {heading}
-        </h2>
-        {description && (
-          <p className="text-muted-foreground tracking-wide text-clampMd max-w-prose">
-            {description}
-          </p>
-        )}
-        {subDescription && (
-          <p className="text-muted-foreground tracking-wide text-clampSm max-w-prose">
-            {subDescription}
-          </p>
-        )}
-        <div className="my-4">{children}</div>
-      </motion.aside>
+        <motion.div
+          className="flex justify-center flex-1 gap-y-2 flex-col h-full w-full relative max-w-[800px] mx-auto px-6"
+          initial={fmVariants.viewMotion.initial}
+          whileInView={fmVariants.viewMotion.whileInView}
+          viewport={fmVariants.viewMotion.viewport}
+          transition={fmVariants.transition}
+          key={sectionId}
+        >
+          <GuidedLogoComponent
+            logoWidth={80}
+            logoFill="#377fb9"
+            footPrintClassName="text-[#377fb9]"
+            className="w-fit sm:mb-4 bg-transparent hover:bg-transparent !p-0"
+          />
+          <SpiralPointer width={30} className="sm:-ml-4" />
+          <h2 className="text-clampMd sm:!text-clampBase font-semibold">
+            {heading}
+          </h2>
+          {description && (
+            <p className="text-muted-foreground tracking-wide text-clampMd max-w-prose">
+              {description}
+            </p>
+          )}
+          {subDescription && (
+            <p className="text-muted-foreground tracking-wide text-clampSm max-w-prose">
+              {subDescription}
+            </p>
+          )}
+          <div className="my-4">{children}</div>
+        </motion.div>
+
+        <div className="w-full flex items-center justify-end px-4 py-2">
+          <SlideButtons />
+        </div>
+      </aside>
     </motion.section>
   );
 };
