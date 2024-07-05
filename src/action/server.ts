@@ -2,6 +2,7 @@
 
 import { TInteractiveFormSchema } from "@/components/interactive-form/forms/zodSchema";
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
 export const saveFormInformation = async (values: TInteractiveFormSchema) => {
   if (
@@ -21,43 +22,35 @@ export const saveFormInformation = async (values: TInteractiveFormSchema) => {
   )
     return {
       status: "failure",
-      message: "Information is Incomplete",
-      data: null,
-    };
-
-  const checkIfEmailExists = await db.guidedForm.findUnique({
-    where: { email: values.email },
-  });
-
-  if (checkIfEmailExists)
-    return {
-      status: "failure",
       message:
-        "This Email Address has already submitted their information with us.",
+        "Information is Incomplete. Check your information, or retake form questions",
       data: null,
     };
 
-  const newData = await db.guidedForm.create({
-    data: {
-      fullName: values.fullName,
-      email: values.email,
-      gender: values.gender,
-      country: values.country,
-      levelOfEducation: values.levelOfEducation,
-      yearsOfWorkExperience: values.yearsOfWorkExperience,
-      areaOfExpertise: values.areaOfExpertise.join("---"),
-      currentRole: values.currentRole,
-      workingInYourField: values.workingInYourField,
-      sustainableDevelopmentGoals:
-        values.sustainableDevelopmentGoals.join("---"),
-      mentorshipFrequency: values.mentorshipFrequency,
-      primaryMotivationCareer: values.primaryMotivationCareer?.join("---"),
-      primaryMotivationUniversity:
-        values.primaryMotivationUniversity?.join("---"),
+  const formData: Prisma.guidedFormCreateInput = {
+    fullName: values.fullName,
+    email: values.email,
+    gender: values.gender,
+    country: values.country,
+    levelOfEducation: values.levelOfEducation,
+    yearsOfWorkExperience: values.yearsOfWorkExperience,
+    areaOfExpertise: values.areaOfExpertise.join("---"),
+    currentRole: values.currentRole,
+    workingInYourField: values.workingInYourField,
+    sustainableDevelopmentGoals: values.sustainableDevelopmentGoals.join("---"),
+    mentorshipFrequency: values.mentorshipFrequency,
+    primaryMotivationCareer: values.primaryMotivationCareer?.join("---"),
+    primaryMotivationUniversity:
+      values.primaryMotivationUniversity?.join("---"),
 
-      careerPathExtent: values.careerPathExtent || null,
-      linkToSocialMedia: values.linkToSocialMedia || null,
-    },
+    careerPathExtent: values.careerPathExtent || null,
+    linkToSocialMedia: values.linkToSocialMedia || null,
+  };
+
+  const newData = await db.guidedForm.upsert({
+    where: { email: values.email },
+    update: formData,
+    create: formData,
   });
 
   return {
