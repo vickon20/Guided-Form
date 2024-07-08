@@ -50,7 +50,7 @@ function YearsOfWorkExperience({}: Props) {
             <span className="p-1 sm:p-2 text-white bg-primary">
               {index + 1}
             </span>
-            <span>{item.value}</span>
+            <span>{item.title}</span>
             {yearsOfWorkExperience === item.value && (
               <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
             )}

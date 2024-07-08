@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, CircleCheckBig } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { mentorshipFrquencyData } from "../constants";
+import { mentorshipFrequencyData } from "../constants";
 import useInteractiveForm from "../use-interactive-form-hook";
 
 type Props = {};
@@ -36,7 +36,7 @@ function MentorshipFrequencyForm({}: Props) {
   return (
     <div className="space-y-8">
       <div className="space-y-3">
-        {mentorshipFrquencyData.map((item, index) => (
+        {mentorshipFrequencyData.map((item, index) => (
           <div
             key={item.value}
             className={cn(
@@ -50,7 +50,7 @@ function MentorshipFrequencyForm({}: Props) {
             <span className="p-1 sm:p-2 text-white bg-primary">
               {index + 1}
             </span>
-            <span>{item.value}</span>
+            <span>{item.title}</span>
             {mentorshipFrequency === item.value && (
               <CircleCheckBig className="size-[16px] sm:size-[20px] ml-auto mr-4" />
             )}
