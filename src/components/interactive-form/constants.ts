@@ -13,10 +13,10 @@ export const levelOfEducationData = [
 ];
 
 export const yearsOfWorkExperienceData = [
-  { id: 1, value: "Less than 2 years", title: "Less than 2 years" },
-  { id: 2, value: "2 - 5 years", title: "2 - 5 years" },
-  { id: 3, value: "5 - 10 years", title: "5 - 10 years" },
-  { id: 4, value: "Greater than 10 years", title: "Greater than 10 years" },
+  { id: "1", value: "Less than 2 years", title: "Less than 2 years" },
+  { id: "2", value: "2 - 5 years", title: "2 - 5 years" },
+  { id: "3", value: "5 - 10 years", title: "5 - 10 years" },
+  { id: "4", value: "Greater than 10 years", title: "Greater than 10 years" },
 ];
 
 export const areaOfExpertiseData = [
@@ -127,9 +127,9 @@ export const sdgData = [
 ];
 
 export const mentorshipFrequencyData = [
-  { id: 1, value: "Once a week", title: "Once a week" },
-  { id: 2, value: "Biweekly", title: "Biweekly" },
-  { id: 3, value: "Once a month", title: "Once a month" },
+  { id: "1", value: "Once a week", title: "Once a week" },
+  { id: "2", value: "Biweekly", title: "Biweekly" },
+  { id: "3", value: "Once a month", title: "Once a month" },
 ];
 
 export const fmVariants = {
