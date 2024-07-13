@@ -34,14 +34,15 @@ export const saveFormInformation = async (values: TInteractiveFormSchema) => {
     country: values.country,
     levelOfEducation: values.levelOfEducation,
     yearsOfWorkExperience: values.yearsOfWorkExperience,
-    areaOfExpertise: values.areaOfExpertise.join("---"),
+    areaOfExpertise: values.areaOfExpertise.join("--@--"),
     currentRole: values.currentRole,
     workingInYourField: values.workingInYourField,
-    sustainableDevelopmentGoals: values.sustainableDevelopmentGoals.join("---"),
+    sustainableDevelopmentGoals:
+      values.sustainableDevelopmentGoals.join("--@--"),
     mentorshipFrequency: values.mentorshipFrequency,
-    primaryMotivationCareer: values.primaryMotivationCareer?.join("---"),
+    primaryMotivationCareer: values.primaryMotivationCareer?.join("--@--"),
     primaryMotivationUniversity:
-      values.primaryMotivationUniversity?.join("---"),
+      values.primaryMotivationUniversity?.join("--@--"),
 
     careerPathExtent: values.careerPathExtent || null,
     linkToSocialMedia: values.linkToSocialMedia || null,
