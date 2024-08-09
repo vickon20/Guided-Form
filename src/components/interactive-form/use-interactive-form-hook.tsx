@@ -211,6 +211,7 @@ const useInteractiveForm = create(
       firstPage: () => {
         const currentPage = get().pages.find((page) => page.id === "home");
         if (!currentPage) return;
+
         set({ currentPage: currentPage });
       },
       lastPage: () => {

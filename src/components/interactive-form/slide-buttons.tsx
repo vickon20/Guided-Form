@@ -1,14 +1,14 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, Power } from "lucide-react";
 import useInteractiveForm from "./use-interactive-form-hook";
 import GuidedLogoComponent from "../guided-logo-component";
 
 type Props = {};
 
 const SlideButtons = ({}: Props) => {
-  const { currentPage, nextPage, firstPage, lastPage, previousPage, pages } =
+  const { currentPage, firstPage, lastPage, resetStore, pages } =
     useInteractiveForm();
 
   return (
@@ -24,16 +24,23 @@ const SlideButtons = ({}: Props) => {
         <Button
           disabled={currentPage.prev === ""}
           onClick={firstPage}
-          title="first page"
+          title="First page"
           icon={<ChevronsLeft />}
-          className={buttonVariants({ className: "rounded-none p-2" })}
+          className="rounded-none p-2"
+        />
+        <Button
+          onClick={resetStore}
+          title="Reset"
+          variant="destructive"
+          icon={<Power />}
+          className="rounded-none p-2"
         />
         <Button
           disabled={currentPage.next === ""}
           onClick={lastPage}
-          title="last page"
+          title="Last page"
           icon={<ChevronsRight />}
-          className={buttonVariants({ className: "rounded-none p-2" })}
+          className="rounded-none p-2"
         />
       </div>
 

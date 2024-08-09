@@ -28,7 +28,7 @@ function AreaOfExpertise({}: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
   async function onNext() {
-    if (areaOfExpertise.length === 0)
+    if (!areaOfExpertise || areaOfExpertise.length === 0)
       return toast.error("Please select area of expertise");
 
     setIsLoading(true);
