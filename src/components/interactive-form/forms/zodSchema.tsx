@@ -7,15 +7,15 @@ export const interactiveFormSchema = z.object({
   country: z.string().min(1),
   levelOfEducation: z.string().min(1),
   yearsOfWorkExperience: z.string().min(1),
-  areaOfExpertise: z.string().min(1).array(),
+  areaOfExpertise: z.string().min(1).array().nonempty(),
   currentRole: z.string().min(1),
   workingInYourField: z.string().min(1),
-  sustainableDevelopmentGoals: z.string().min(1).array(),
+  sustainableDevelopmentGoals: z.string().min(1).array().nonempty(),
   mentorshipFrequency: z.string().min(1),
   careerPathExtent: z.string(),
   primaryMotivationUniversity: z.string().min(1).array(),
   primaryMotivationCareer: z.string().min(1).array(),
-  linkToSocialMedia: z.string().url().optional(),
+  linkToSocialMedia: z.string().url().or(z.literal("")),
 });
 
 export const interactiveFormPartialSchema = interactiveFormSchema.partial();

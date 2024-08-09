@@ -28,6 +28,7 @@ export function InteractiveForm() {
   const currentPageState = useMemo(() => currentPage, [currentPage]);
 
   const validator = interactiveFormSchema.safeParse(form);
+  console.log(validator.error?.flatten().fieldErrors);
 
   return (
     <AnimatePresence mode="wait" key={currentPageState.id}>
