@@ -6,12 +6,15 @@ import { useForm } from "react-hook-form";
 import CustomForm from "@/components/custom-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import useInteractiveForm from "../use-interactive-form-hook";
-import { TInteractiveFormSchema, interactiveFormSchema } from "./zodSchema";
-import { toast } from "sonner";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { countries, TCountryCode } from "countries-list";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo } from "react";
+import { toast } from "sonner";
+import useInteractiveForm from "../use-interactive-form-hook";
+import {
+  interactiveFormPartialSchema,
+  TInteractiveFormPartialSchema,
+} from "./zodSchema";
 
 type Props = {};
 
@@ -24,12 +27,12 @@ function CountryForm({}: Props) {
     form: defaultData,
   } = useInteractiveForm();
 
-  const form = useForm<TInteractiveFormSchema>({
-    resolver: zodResolver(interactiveFormSchema),
+  const form = useForm<TInteractiveFormPartialSchema>({
+    resolver: zodResolver(interactiveFormPartialSchema),
     defaultValues: { country: defaultData.country },
   });
 
-  async function onNext(values: TInteractiveFormSchema) {
+  async function onNext(values: TInteractiveFormPartialSchema) {
     if (!values.country) return toast.error("Please select a country");
     setFormData({ country: values.country });
     await new Promise((resolve) => setTimeout(resolve, 500));

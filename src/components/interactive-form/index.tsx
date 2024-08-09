@@ -21,23 +21,13 @@ import WorkingInYourField from "./forms/working-in-your-field";
 import YearsOfWorkExperience from "./forms/years-of-work-experience";
 import SaveInformation from "./save-information";
 import useInteractiveForm from "./use-interactive-form-hook";
+import { interactiveFormSchema } from "./forms/zodSchema";
 
 export function InteractiveForm() {
   const { currentPage, nextPage, previousPage, form } = useInteractiveForm();
   const currentPageState = useMemo(() => currentPage, [currentPage]);
 
-  const isIncompleteInfo =
-    !form.fullName ||
-    !form.email ||
-    !form.gender ||
-    !form.country ||
-    !form.levelOfEducation ||
-    !form.yearsOfWorkExperience ||
-    form.areaOfExpertise?.length === 0 ||
-    !form.currentRole ||
-    !form.workingInYourField ||
-    form.sustainableDevelopmentGoals?.length === 0 ||
-    !form.mentorshipFrequency;
+  const validator = interactiveFormSchema.safeParse(form);
 
   return (
     <AnimatePresence mode="wait" key={currentPageState.id}>
@@ -241,17 +231,17 @@ export function InteractiveForm() {
         <FormSection
           sectionId="save-information"
           heading={
-            isIncompleteInfo
+            !validator.success
               ? "Incomplete Information"
               : "Thank you for partnering with GuidED to empower young Africans."
           }
           description={
-            isIncompleteInfo
+            !validator.success
               ? "Please, Go back and make sure to fill the remaining below"
               : "You Have Successfully Completed our questions. We Really Appreciate Your Response."
           }
         >
-          <SaveInformation isIncompleteInfo={isIncompleteInfo} />
+          <SaveInformation />
         </FormSection>
       )}
     </AnimatePresence>

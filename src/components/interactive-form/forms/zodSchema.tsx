@@ -1,21 +1,26 @@
 import { z } from "zod";
 
 export const interactiveFormSchema = z.object({
-  fullName: z.string().min(3).max(30).optional(),
-  email: z.string().email().optional(),
-  gender: z.string().min(1).optional(),
-  country: z.string().min(1).optional(),
-  levelOfEducation: z.string().min(1).optional(),
-  yearsOfWorkExperience: z.string().min(1).optional(),
-  areaOfExpertise: z.array(z.string()).optional(),
-  currentRole: z.string().min(1).optional(),
-  primaryMotivationUniversity: z.array(z.string()).optional(),
-  primaryMotivationCareer: z.array(z.string()).optional(),
-  workingInYourField: z.string().min(1).optional(),
-  careerPathExtent: z.string().min(1).optional(),
-  sustainableDevelopmentGoals: z.array(z.string()).optional(),
+  fullName: z.string().min(3).max(30),
+  email: z.string().email(),
+  gender: z.string().min(3),
+  country: z.string().min(1),
+  levelOfEducation: z.string().min(1),
+  yearsOfWorkExperience: z.string().min(1),
+  areaOfExpertise: z.array(z.string()).nonempty(),
+  currentRole: z.string().min(1),
+  workingInYourField: z.string().min(1),
+  sustainableDevelopmentGoals: z.array(z.string()).nonempty(),
+  mentorshipFrequency: z.string().min(1),
+  careerPathExtent: z.string(),
+  primaryMotivationUniversity: z.array(z.string()),
+  primaryMotivationCareer: z.array(z.string()),
   linkToSocialMedia: z.string().url().optional(),
-  mentorshipFrequency: z.string().min(1).optional(),
 });
 
+export const interactiveFormPartialSchema = interactiveFormSchema.partial();
+
 export type TInteractiveFormSchema = z.infer<typeof interactiveFormSchema>;
+export type TInteractiveFormPartialSchema = z.infer<
+  typeof interactiveFormPartialSchema
+>;

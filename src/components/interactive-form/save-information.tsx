@@ -1,27 +1,26 @@
 "use client";
 
 import { saveFormInformation } from "@/action/server";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import useInteractiveForm from "./use-interactive-form-hook";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { toast } from "sonner";
+import { interactiveFormSchema } from "./forms/zodSchema";
+import useInteractiveForm from "./use-interactive-form-hook";
 
-type Props = {
-  isIncompleteInfo: boolean;
-};
-const SaveInformation = ({ isIncompleteInfo }: Props) => {
+const SaveInformation = () => {
   const { form, previousPage, setCurrentPage } = useInteractiveForm();
   const [isLoading, setIsLoading] = useState(false);
+  const validator = interactiveFormSchema.safeParse(form);
 
   const onSave = async () => {
-    if (isIncompleteInfo) return;
+    if (!validator.success)
+      return toast.error("Please fill all the required fields");
 
     setIsLoading(true);
     try {
-      const response = await saveFormInformation(form);
+      const response = await saveFormInformation(validator.data);
 
-      if (response.status === "failure" && response.data === null) {
+      if (!response.status && !response.data) {
         return toast.error(response.message);
       }
       toast.success("Form saved successfully", {
@@ -41,9 +40,9 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
 
   return (
     <div className="w-full py-2">
-      {isIncompleteInfo && (
+      {!validator.success && (
         <div className="space-y-4 w-full h-[50vh] pb-10 overflow-auto">
-          {!form.fullName && (
+          {validator.error.formErrors.fieldErrors.fullName && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -56,7 +55,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Full Name is Required
             </p>
           )}
-          {!form.email && (
+          {validator.error.formErrors.fieldErrors.email && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -69,7 +68,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Email is Required
             </p>
           )}
-          {!form.gender && (
+          {validator.error.formErrors.fieldErrors.gender && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -82,7 +81,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Gender is Required
             </p>
           )}
-          {!form.country && (
+          {validator.error.formErrors.fieldErrors.country && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -95,7 +94,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Country is Required
             </p>
           )}
-          {!form.levelOfEducation && (
+          {validator.error.formErrors.fieldErrors.levelOfEducation && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -108,7 +107,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Level Of Education is Required
             </p>
           )}
-          {!form.yearsOfWorkExperience && (
+          {validator.error.formErrors.fieldErrors.yearsOfWorkExperience && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -121,21 +120,20 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Years of Work Experience is Required
             </p>
           )}
-          {!form.areaOfExpertise ||
-            (form.areaOfExpertise.length === 0 && (
-              <p className="text-sm text-destructive flex items-center gap-x-1">
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setCurrentPage("area-of-expertise")}
-                  className="text-xs !h-6 rounded-none"
-                >
-                  &larr; Go
-                </Button>
-                Area of Expertise is Required
-              </p>
-            ))}
-          {!form.currentRole && (
+          {validator.error.formErrors.fieldErrors.areaOfExpertise && (
+            <p className="text-sm text-destructive flex items-center gap-x-1">
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => setCurrentPage("area-of-expertise")}
+                className="text-xs !h-6 rounded-none"
+              >
+                &larr; Go
+              </Button>
+              Area of Expertise is Required
+            </p>
+          )}
+          {validator.error.formErrors.fieldErrors.currentRole && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -148,7 +146,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               Current Role is Required
             </p>
           )}
-          {!form.workingInYourField && (
+          {validator.error.formErrors.fieldErrors.workingInYourField && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -158,26 +156,26 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
               >
                 &larr; Go
               </Button>
-              Field Data is Required
+              Working Field Data is Required
             </p>
           )}
 
-          {!form.sustainableDevelopmentGoals ||
-            (form.sustainableDevelopmentGoals.length === 0 && (
-              <p className="text-sm text-destructive flex items-center gap-x-1">
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setCurrentPage("sustainable-development-goal")}
-                  className="text-xs !h-6 rounded-none"
-                >
-                  &larr; Go
-                </Button>
-                SDG is Required
-              </p>
-            ))}
+          {validator.error.formErrors.fieldErrors
+            .sustainableDevelopmentGoals && (
+            <p className="text-sm text-destructive flex items-center gap-x-1">
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => setCurrentPage("sustainable-development-goal")}
+                className="text-xs !h-6 rounded-none"
+              >
+                &larr; Go
+              </Button>
+              SDG is Required
+            </p>
+          )}
 
-          {!form.mentorshipFrequency && (
+          {validator.error.formErrors.fieldErrors.mentorshipFrequency && (
             <p className="text-sm text-destructive flex items-center gap-x-1">
               <Button
                 variant="destructive"
@@ -193,7 +191,7 @@ const SaveInformation = ({ isIncompleteInfo }: Props) => {
         </div>
       )}
 
-      {!isIncompleteInfo && (
+      {validator.success && (
         <div className="flex items-center gap-2 sm:gap-4">
           <Button variant="secondary" size="lg" onClick={previousPage}>
             &larr; Previous

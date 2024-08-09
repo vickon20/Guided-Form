@@ -6,10 +6,13 @@ import { useForm } from "react-hook-form";
 import CustomForm from "@/components/custom-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import useInteractiveForm from "../use-interactive-form-hook";
-import { TInteractiveFormSchema, interactiveFormSchema } from "./zodSchema";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
+import useInteractiveForm from "../use-interactive-form-hook";
+import {
+  TInteractiveFormPartialSchema,
+  interactiveFormPartialSchema,
+} from "./zodSchema";
 
 type Props = {};
 
@@ -22,12 +25,12 @@ function CurrentRoleForm({}: Props) {
     form: defaultData,
   } = useInteractiveForm();
 
-  const form = useForm<TInteractiveFormSchema>({
-    resolver: zodResolver(interactiveFormSchema),
+  const form = useForm<TInteractiveFormPartialSchema>({
+    resolver: zodResolver(interactiveFormPartialSchema),
     defaultValues: { currentRole: defaultData.currentRole },
   });
 
-  async function onNext(values: TInteractiveFormSchema) {
+  async function onNext(values: TInteractiveFormPartialSchema) {
     if (!values.currentRole)
       return toast.error("Your Current Role is required");
     setFormData({ currentRole: values.currentRole });

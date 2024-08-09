@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { TInteractiveFormSchema } from "./forms/zodSchema";
+import { TInteractiveFormPartialSchema } from "./forms/zodSchema";
 import { primaryMotivationData } from "./constants";
 
 export type TPageId =
@@ -32,7 +32,7 @@ export type TInitialPages = {
   question: number;
 };
 
-const initialForm: TInteractiveFormSchema = {
+const initialForm: TInteractiveFormPartialSchema = {
   fullName: "",
   email: "",
   gender: "",
@@ -169,10 +169,10 @@ export const initialPages: TInitialPages[] = [
 
 export type TInteractiveFormHook = {
   pages: TInitialPages[];
-  form: TInteractiveFormSchema;
+  form: TInteractiveFormPartialSchema;
   currentPage: TInitialPages;
   setCurrentPage: (currentPageId: TPageId) => void;
-  setFormData: (formData: TInteractiveFormSchema) => void;
+  setFormData: (formData: TInteractiveFormPartialSchema) => void;
   nextPage: () => void;
   previousPage: () => void;
   firstPage: () => void;
@@ -227,7 +227,7 @@ const useInteractiveForm = create(
         if (!currentPage) return;
         set({ currentPage: currentPage });
       },
-      setFormData: (formData: TInteractiveFormSchema) => {
+      setFormData: (formData: TInteractiveFormPartialSchema) => {
         set({ form: { ...get().form, ...formData } });
       },
       resetStore: () =>

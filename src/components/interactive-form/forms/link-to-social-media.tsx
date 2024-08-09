@@ -6,9 +6,12 @@ import { useForm } from "react-hook-form";
 import CustomForm from "@/components/custom-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import useInteractiveForm from "../use-interactive-form-hook";
-import { TInteractiveFormSchema, interactiveFormSchema } from "./zodSchema";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import useInteractiveForm from "../use-interactive-form-hook";
+import {
+  TInteractiveFormPartialSchema,
+  interactiveFormPartialSchema,
+} from "./zodSchema";
 
 type Props = {};
 
@@ -20,14 +23,14 @@ function LinkToSocialMedia({}: Props) {
     previousPage,
     form: defaultData,
   } = useInteractiveForm();
-  const form = useForm<TInteractiveFormSchema>({
-    resolver: zodResolver(interactiveFormSchema),
+  const form = useForm<TInteractiveFormPartialSchema>({
+    resolver: zodResolver(interactiveFormPartialSchema),
     defaultValues: {
       linkToSocialMedia: defaultData?.linkToSocialMedia || undefined,
     },
   });
 
-  async function onNext(values: TInteractiveFormSchema) {
+  async function onNext(values: TInteractiveFormPartialSchema) {
     setFormData({ linkToSocialMedia: values.linkToSocialMedia });
     await new Promise((resolve) => setTimeout(resolve, 500));
     nextPage();
